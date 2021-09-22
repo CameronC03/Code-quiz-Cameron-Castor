@@ -14,6 +14,15 @@ let scoresBtn = document.getElementById("scores")
 let StartButton  = document.getElementById("Start-Button")
 StartButton.addEventListener("click", setTime);
 
+var questions = document.getElementById("questions")
+
+let results = document.getElementById("results")
+
+var choices =document.getElementById("choices")
+
+
+
+
 
 
 
