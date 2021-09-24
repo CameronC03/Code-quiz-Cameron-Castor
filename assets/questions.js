@@ -18,13 +18,13 @@ var quizQuestions = [
     },
 
     {
-        title: ".",
-        multipleChoice: [".", ".", ".", "."],
-        answer: "."
+        title: ".String values must be enclosed within __ when being assigned to variables",
+        multipleChoice: [".commas", ".curly brackets", ".quotes", ".parenthathese"],
+        answer: ".quotes"
     },
 
     {
-        title: ".",
-        multipleChoice: [".", ".", ".", "."],
-        answer: "."
+        title: ".A very useful tool used during development and debugging for printing content to the debugger is:",
+        multipleChoice: [".JavaScript", ".terminal / bash", ".for loops", ".console.log"],
+        answer: ".console.log"
     },
