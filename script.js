@@ -30,12 +30,20 @@ let score = 0
 
 function setTime() {
     displayQuestions()
-    let timerinterval = setInterval(function()
+    let timerinterval = setInterval(function() {
     SecondsLeft--;
     timer.textContent = "";
-    timer.textContent = "Time: " + SecondsLeft;
+    timer.textContent = "Time: " + SecondsLeft;{
+    if (SecondsLeft<= 0 || questionsCount === question.length)
+    clearInterval(timerinterval);
+    getUserScore();
+    }
+  }, 1000);
+}     
 
-}
+
+    
+    
 
 
 
