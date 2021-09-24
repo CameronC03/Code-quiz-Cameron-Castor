@@ -41,6 +41,22 @@ function setTime() {
   }, 1000);
 }     
 
+function displayQuestions() {
+removeEventListener(StartButton);
+
+if (questionsCount < question.length) {
+questions.innerHTML = questions[questionsCount].title;
+choices.textContent = "";
+
+for (let i = 0; i< questions[questionsCount].multipleChoice.length; i++) {
+    score += SecondsLeft;
+} else {
+score -= 10;
+SecondsLeft = SecondsLeft - 10;
+}
+
+
+
 
     
     
