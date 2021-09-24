@@ -18,7 +18,26 @@ var questions = document.getElementById("questions")
 
 let results = document.getElementById("results")
 
-var choices =document.getElementById("choices")
+var choices = document.getElementById("choices")
+
+let emptyArray = [];
+
+let storedArray = JSON.parse(window.localStorage.getItem("highScore"));
+
+var questionsCount = 0;
+
+let score = 0
+
+function setTime() {
+    displayQuestions()
+    let timerinterval = setInterval(function()
+    SecondsLeft--;
+    timer.textContent = "";
+    timer.textContent = "Time: " + SecondsLeft;
+
+}
+
+
 
 
 
