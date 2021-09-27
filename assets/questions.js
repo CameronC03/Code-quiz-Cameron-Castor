@@ -27,4 +27,5 @@ var quizQuestions = [
         title: ".A very useful tool used during development and debugging for printing content to the debugger is:",
         multipleChoice: [".JavaScript", ".terminal / bash", ".for loops", ".console.log"],
         answer: ".console.log"
-    },
+    }
+];

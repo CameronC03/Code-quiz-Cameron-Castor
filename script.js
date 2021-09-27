@@ -34,7 +34,7 @@ function setTime() {
     SecondsLeft--;
     timer.textContent = "";
     timer.textContent = "Time: " + SecondsLeft;{
-    if (SecondsLeft<= 0 || questionsCount === question.length)
+    if (SecondsLeft<= 0 || questionsCount === quizQuestions.length)
     clearInterval(timerinterval);
     getUserScore();
     }
@@ -44,17 +44,44 @@ function setTime() {
 function displayQuestions() {
 removeEventListener(StartButton);
 
-if (questionsCount < question.length) {
-questions.innerHTML = questions[questionsCount].title;
+if (questionsCount < quizQuestions.length) {
+questions.innerHTML = quizQuestions[questionsCount].title;
 choices.textContent = "";
 
-for (let i = 0; i< questions[questionsCount].multipleChoice.length; i++) {
-    score += SecondsLeft;
-} else {
-score -= 10;
-SecondsLeft = SecondsLeft - 10;
+for (let i = 0; i < quizQuestions[questionsCount].multipleChoice.length; i++) {
+    let el = document.createElement("button");
+    el.innerText = quizQuestions[questionsCount].multipleChoice[i];
+    el.setAttribute("data-id", i);
+    el.addEventListener("click", function (event) {
+      event.stopPropagation();
+      
+
+    if (el.innerText === quizQuestions[questionsCount].answer) {
+      score += SecondsLeft;
+    } else {
+      score -= 10
+      SecondsLeft = SecondsLeft - 15;
+    }
+
+questions.innerHTML = "";
+
+if (questionsCount === quizQuestions.length) {
+return;
+  } else {
+questionsCount++;
+displayQuestions();
+  }
+});
+choices.append(el);
+}
+}
 }
 
+function getUserScore() {
+  timer.remove();
+
+  let 
+}
 
 
 
