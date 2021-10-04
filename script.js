@@ -1,24 +1,24 @@
 // starting time
-let SecondsLeft = 80;
+let secondsLeft = 80;
 
 // timer
-let QuizTime = document.getElementById("Quiz-Time");
+let quizTime = document.getElementById("quiz-time");
 
 // scores
-let QuizScores = document.getElementById("Quiz-Scores")
+let quizScores = document.getElementById("quiz-scores");
 
-let buttons = document.getElementById("buttons");
+let buttons = document.getElementById("buttons")
 
 let scoresBtn = document.getElementById("scores")
 
-let StartButton  = document.getElementById("Start-Button")
-StartButton.addEventListener("click", setTime);
+let startButton  = document.getElementById("start-button");
+startButton.addEventListener("click", setTime);
 
-var questions = document.getElementById("questions")
+var quizQuestions = document.getElementById("quiz-questions");
 
-let results = document.getElementById("results")
+let results = document.getElementById("results");
 
-var choices = document.getElementById("choices")
+var choices = document.getElementById("choices");
 
 let emptyArray = [];
 
@@ -29,12 +29,12 @@ var questionsCount = 0;
 let score = 0
 
 function setTime() {
-    displayQuestions()
+    displayQuestions();
     let timerinterval = setInterval(function() {
-    SecondsLeft--;
-    timer.textContent = "";
-    timer.textContent = "Time: " + SecondsLeft;{
-    if (SecondsLeft<= 0 || questionsCount === quizQuestions.length)
+    secondsLeft--;
+    quizTime.textContent = "";
+    quizTime.textContent = "Time: " + secondsLeft;
+    if (secondsLeft <= 0 || questionsCount === questions.length) {
     clearInterval(timerinterval);
     getUserScore();
     }
@@ -42,54 +42,55 @@ function setTime() {
 }     
 
 function displayQuestions() {
-removeEventListener(StartButton);
+removeEls(startButton);
 
-if (questionsCount < quizQuestions.length) {
-questions.innerHTML = quizQuestions[questionsCount].title;
+if (questionsCount < questions.length) {
+quizQuestions.innerHTML = questions[questionsCount].title;
 choices.textContent = "";
 
-for (let i = 0; i < quizQuestions[questionsCount].multipleChoice.length; i++) {
+for (let i = 0; i < questions[questionsCount].multipleChoice.length; i++) {
     let el = document.createElement("button");
-    el.innerText = quizQuestions[questionsCount].multipleChoice[i];
+    el.innerText = questions[questionsCount].multipleChoice[i];
     el.setAttribute("data-id", i);
     el.addEventListener("click", function (event) {
       event.stopPropagation();
       
 
-    if (el.innerText === quizQuestions[questionsCount].answer) {
-      score += SecondsLeft;
+    if (el.innerText === questions[questionsCount].answer) {
+      score += secondsLeft;
     } else {
       score -= 10
-      SecondsLeft = SecondsLeft - 15;
+      secondsLeft = secondsLeft - 15;
     }
 
-questions.innerHTML = "";
+quizQuestions.innerHTML = "";
 
-if (questionsCount === quizQuestions.length) {
+if (questionsCount === questions.length) {
 return;
   } else {
 questionsCount++;
 displayQuestions();
   }
 });
-choices.append(el);
-}
-}
+   choices.append(el);
+   }
+ }
 }
 
 function getUserScore() {
-  timer.remove();
+  quizTime.remove();
+  choices.textContent= "";
 
   let initInput = document.createElement("input");
   let afterScoresBtn = document.createElement("input");
   
-  results.innerHTML = `your score is ${score} enter name`
+  results.innerHTML = `your score is ${score} enter name`;
   afterScoresBtn.setAttribute("type", "button");
   afterScoresBtn.setAttribute("value", "Post your score");
   afterScoresBtn.setAttribute("type", "text");
   afterScoresBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    let scoresA = definescoresA(storedArray, emptyArray)
+    let scoresA = defineScoresA(storedArray, emptyArray)
     
     let init = initInput.value;
     let scoresAndUsers = {
@@ -100,33 +101,33 @@ function getUserScore() {
   scoresA.push(scoresAndUsers);
   saveScore(scoresA);
   displayAllScore();
-  clearScoreBtn();
+  clearScores();
   cancelButton();
-  seeScoresBtn.remove();
+  scoresBtn.remove();
 });
 
 results.append(initInput)
 results.append(afterScoresBtn)
 }
 
-const saveScore = (Array) => { 
-  window.localStorage.setItem("highScore", JSON.stringify(Array));
+const saveScore = (array) => { 
+  window.localStorage.setItem("highScore", JSON.stringify(array));
 }
 
-const defineScoresA = (a1, a2) => {
-if(a1 !== null) {
-  return a1
-} else {
-return a2
-}
+const defineScoresA = (arr1, arr2) => {
+if(arr1 !== null) {
+  return arr1
+ } else {
+return arr2
+ }
 }
 
-const removeEventListener = (...els) => {
+const removeEls = (...els) => {
   for (let el of els) el.remove();
 }
 
 function displayAllScore() {
-  removeEventListener(timer, results, StartButton)\
+  removeEls(quizTime, results, startButton)
   let scoresA = defineScoresA(storedArray, emptyArray)
 
   scoresA.forEach(obj => {
@@ -134,44 +135,43 @@ function displayAllScore() {
     let init = obj.init
     let resultsP = document.createElement("p")
     resultsP.innerText = `${init}: ${scoreA}`;
-    QuizScores.append(resultsP);
+    quizScores.append(resultsP);
   });
 }
 
-function seeScores() {
-seeScoresBtn.addEventListener("click" function(event) {
+function clearScores() {
+ scoresBtn.addEventListener("click", function(event) {
   event.preventDefault();
-  removeEventListener(timer, StartButton)
+  removeEls(timer, StartButton);
   displayAllScore();
-  removeEventListener(seeScoresBtn);
+  removeEls(scoresBtn);
   clearScoreBtn();
   cancelButton();
-});
+  });
+}
 
-function cancelButton()
+function deleteScoresBtn() {
+  let deleteBtn = document.createElement("input");
+  deleteBtn.setAttribute("type", "button")
+  deleteBtn.setAttribute("value", "delete scores")
+  deleteBtn.addEventListener("click", function(event){
+    event.preventDefault
+    removeEls(QuizScores)
+    window.localStorage.removeItem("highscores")
+  })
+  QuizScores.append(deleteBtn)
+}
+ 
+function cancelButton() {
 let cancelBtn = document.createElement("input");
-cancelBtn.setAttribute("value", "go back");
 cancelBtn.setAttribute("type", "button");
-cancelBtn.addEventListener("click", function(event) {
+cancelBtn.setAttribute("value", "Go Back");
+cancelBtn.addEventListener("click", function(event){
   event.preventDefault();
   window.location.reload();
 })
 buttons.append(cancelBtn)
 }
-
-function deleteScoresBtn() {
-  let deleteBtn = document.createElement("input");
-  deleteBtn.setAttribute("value", "delete scores")
-  deleteBtn.setAttribute("type", "button")
-  deleteBtn.addEventListener("click", function(event) {
-    event.preventDefault
-    removeEventListener(QuizScores)
-    window.localStorage.removeItem("highscores")
-  })
-  QuizScores.append(deleteBtn)
-  
-  
-
     
     
 

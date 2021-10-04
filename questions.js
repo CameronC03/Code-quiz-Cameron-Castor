@@ -1,4 +1,4 @@
-var quizQuestions = [
+var questions = [
     {
         title: ".Commonly used data types DO NOT include:",
         multipleChoice: [".strings", ".booleans", ".alerts", ".numbers"],
@@ -29,3 +29,4 @@ var quizQuestions = [
         answer: ".console.log"
     }
 ];
+
