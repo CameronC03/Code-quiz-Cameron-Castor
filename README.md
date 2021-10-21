@@ -7,7 +7,7 @@ I made this quiz with javascript and i tried to make it transition and everthing
 
 * CSS
 
-*Javascript
+* Javascript
 
 * contact me
 cameroncastor05@gmail.com
